@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Самолетик | Авиасимулятор | Прокачка и рекорды</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a2f4a 0%, #062136 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Анимации */
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(255, 193, 7, 0.8); }
+        }
+
+        .floating-number {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffc107;
+            z-index: 1000;
+            animation: floatUp 0.8s ease-out forwards;
+        }
+
+        /* Хедер */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffc107;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* Игровое поле */
+        .game-container {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .game-area {
+            flex: 2;
+            background: linear-gradient(135deg, #1e5f7a, #0a3a4a);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            background: linear-gradient(180deg, #87CEEB, #E0F6FF);
+            cursor: pointer;
+        }
+
+        .game-sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Секции */
+        .section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 30px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Улучшения */
+        .upgrades-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .upgrade-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+        }
+
+        .upgrade-card:hover:not(.disabled) {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.1);
+            border-color: #ffc107;
+        }
+
+        .upgrade-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .upgrade-name {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .upgrade-level {
+            background: #ffc107;
+            color: #1a1f2e;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .upgrade-price {
+            color: #ffc107;
+            font-weight: 700;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            margin-top: 8px;
+            padding: 6px;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Ежедневная награда */
+        .daily-reward {
+            background: linear-gradient(135deg, rgba(255,193,7,0.2), rgba(255,152,0,0.2));
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .daily-btn {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Кнопка сброса */
+        .reset-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 24px;
+            border-radius: 40px;
+            color: #ff6b6b;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255,107,107,0.2);
+        }
+
+        @media (max-width: 900px) {
+            .game-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Хедер -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-plane"></i> AVIATOR PRO
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="coinsDisplay">0</div>
+                    <div class="stat-label">МОНЕТ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="scoreDisplay">0</div>
+                    <div class="stat-label">РЕКОРД</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="bestScoreDisplay">0</div>
+                    <div class="stat-label">ЛУЧШИЙ</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <!-- Игровая область -->
+            <div class="game-area">
+                <canvas id="gameCanvas" width="800" height="500"></canvas>
+            </div>
+
+            <!-- Боковая панель -->
+            <div class="game-sidebar">
+                <!-- Улучшения -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        <span>ПРОКАЧКА САМОЛЕТА</span>
+                    </div>
+                    <div class="upgrades-grid" id="upgradesGrid"></div>
+                </div>
+
+                <!-- Ежедневная награда -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>ЕЖЕДНЕВНАЯ НАГРАДА</span>
+                    </div>
+                    <div class="daily-reward">
+                        <i class="fas fa-gift" style="font-size: 2rem;"></i>
+                        <div>Награда: 500 монет!</div>
+                        <button class="daily-btn" id="dailyBtn">ЗАБРАТЬ НАГРАДУ</button>
+                        <div id="dailyTimer" style="margin-top: 10px; font-size: 0.8rem;"></div>
+                    </div>
+                </div>
+
+                <!-- Статистика -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-chart-simple"></i>
+                        <span>СТАТИСТИКА</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalFlights">0</div>
+                            <div class="stat-label">ПОЛЕТОВ</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalDistance">0</div>
+                            <div class="stat-label">ПРОЛЕТЕНО</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="upgradeCount">0</div>
+                            <div class="stat-label">УЛУЧШЕНИЙ</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="speedBonus">0</div>
+                            <div class="stat-label">БОНУС СКОРОСТИ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кнопка сброса -->
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fas fa-sync-alt"></i> Сбросить прогресс
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Игровые переменные
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Устанавливаем размеры canvas
+        canvas.width = 800;
+        canvas.height = 500;
+
+        // Игровое состояние
+        let gameRunning = true;
+        let score = 0;
+        let bestScore = 0;
+        
+        // Самолетик
+        let plane = {
+            x: 100,
+            y: canvas.height / 2,
+            width: 40,
+            height: 30,
+            velocity: 0,
+            gravity: 0.5,
+            lift: -8,
+            rotation: 0
+        };
+        
+        // Препятствия (столбы)
+        let obstacles = [];
+        let obstacleWidth = 50;
+        let obstacleGap = 150;
+        let obstacleSpacing = 250;
+        let frameCount = 0;
+        let spawnFrame = 80;
+        
+        // Игровая статистика
+        let gameState = {
+            coins: 0,
+            bestScore: 0,
+            totalFlights: 0,
+            totalDistance: 0,
+            lastDaily: null,
+            upgrades: {
+                doubleCoins: { level: 0, cost: 100, multiplier: 1.5, bonus: 0 },
+                speedBoost: { level: 0, cost: 150, multiplier: 1.4, bonus: 0 },
+                invincibility: { level: 0, cost: 300, multiplier: 1.3, bonus: 0 },
+                magnet: { level: 0, cost: 200, multiplier: 1.35, bonus: 0 }
+            }
+        };
+        
+        let totalUpgradesBought = 0;
+        let currentSpeed = 3;
+        let baseSpeed = 3;
+        let invincibleFrames = 0;
+        
+        // Конфигурация улучшений
+        const upgradesConfig = {
+            doubleCoins: { name: "💰 Двойные монеты", desc: "+50% монет за препятствие", icon: "fas fa-coins" },
+            speedBoost: { name: "⚡ Ускорение", desc: "Увеличивает скорость игры", icon: "fas fa-tachometer-alt" },
+            invincibility: { name: "🛡️ Неуязвимость", desc: "Шанс избежать столкновения", icon: "fas fa-shield-alt" },
+            magnet: { name: "🧲 Магнит", desc: "Притягивает монеты", icon: "fas fa-magnet" }
+        };
+        
+        function getUpgradeCost(upgrade) {
+            return Math.floor(upgrade.cost * Math.pow(upgrade.multiplier, upgrade.level));
+        }
+        
+        function updateSpeed() {
+            const boostLevel = gameState.upgrades.speedBoost.level;
+            currentSpeed = baseSpeed + boostLevel * 0.5;
+            return currentSpeed;
+        }
+        
+        // Создание препятствия
+        function createObstacle() {
+            const minHeight = 50;
+            const maxHeight = canvas.height - obstacleGap - minHeight;
+            const topHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+            
+            obstacles.push({
+                x: canvas.width,
+                topHeight: topHeight,
+                bottomY: topHeight + obstacleGap,
+                passed: false
+            });
+        }
+        
+        // Проверка столкновения
+        function checkCollision() {
+            // Проверка на границы
+            if (plane.y <= 0 || plane.y + plane.height >= canvas.height) {
+                return true;
+            }
+            
+            // Неуязвимость
+            if (invincibleFrames > 0) {
+                return false;
+            }
+            
+            const invincibilityLevel = gameState.upgrades.invincibility.level;
+            if (invincibilityLevel > 0 && Math.random() < Math.min(0.1 + invincibilityLevel * 0.05, 0.4)) {
+                invincibleFrames = 30;
+                showToast(`🛡️ Неуязвимость!`, 'success');
+                return false;
+            }
+            
+            for (let obs of obstacles) {
+                if (plane.x + plane.width > obs.x && plane.x < obs.x + obstacleWidth) {
+                    if (plane.y < obs.topHeight || plane.y + plane.height > obs.bottomY) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        // Начисление монет
+        function addCoins(amount) {
+            let finalAmount = amount;
+            const doubleLevel = gameState.upgrades.doubleCoins.level;
+            if (doubleLevel > 0) {
+                finalAmount = Math.floor(amount * (1 + doubleLevel * 0.5));
+            }
+            gameState.coins += finalAmount;
+            createFloatingNumber(`+${finalAmount}`, finalAmount > amount);
+            return finalAmount;
+        }
+        
+        function createFloatingNumber(text, isSpecial) {
+            const num = document.createElement('div');
+            num.className = 'floating-number';
+            num.innerHTML = text;
+            num.style.color = isSpecial ? '#ff6b6b' : '#ffc107';
+            num.style.left = (event?.clientX || canvas.width/2 + 100) + 'px';
+            num.style.top = (event?.clientY || canvas.height/2) + 'px';
+            document.body.appendChild(num);
+            setTimeout(() => num.remove(), 800);
+        }
+        
+        // Сброс игры
+        function resetGame() {
+            gameRunning = true;
+            score = 0;
+            plane.y = canvas.height / 2;
+            plane.velocity = 0;
+            plane.rotation = 0;
+            obstacles = [];
+            frameCount = 0;
+            invincibleFrames = 0;
+            updateDisplay();
+        }
+        
+        // Конец игры
+        function gameOver() {
+            gameRunning = false;
+            gameState.totalFlights++;
+            if (score > gameState.bestScore) {
+                gameState.bestScore = score;
+                bestScore = score;
+                showToast(`🏆 Новый рекорд: ${score}! +100 монет`, 'achievement');
+                addCoins(100);
+            }
+            gameState.totalDistance += score;
+            updateDisplay();
+            saveGame();
+            showToast(`💥 Крушение! Счет: ${score}`, 'error');
+            setTimeout(() => resetGame(), 1500);
+        }
+        
+        // Прыжок (клик)
+        function jump() {
+            if (gameRunning) {
+                plane.velocity = plane.lift;
+            }
+        }
+        
+        // Обновление игры
+        function update() {
+            if (!gameRunning) return;
+            
+            // Гравитация
+            plane.velocity += plane.gravity;
+            plane.y += plane.velocity;
+            
+            // Вращение самолета
+            plane.rotation = Math.min(Math.max(plane.velocity * 3, -30), 30);
+            
+            // Обновление неуязвимости
+            if (invincibleFrames > 0) {
+                invincibleFrames--;
+            }
+            
+            // Спавн препятствий
+            frameCount++;
+            if (frameCount >= spawnFrame) {
+                frameCount = 0;
+                createObstacle();
+            }
+            
+            // Движение препятствий
+            const speed = updateSpeed();
+            for (let i = 0; i < obstacles.length; i++) {
+                obstacles[i].x -= speed;
+                
+                // Начисление очков при прохождении
+                if (!obstacles[i].passed && obstacles[i].x + obstacleWidth < plane.x) {
+                    obstacles[i].passed = true;
+                    score++;
+                    const coinsEarned = addCoins(10);
+                    createFloatingNumber(`+1 очко`, false);
+                }
+            }
+            
+            // Удаление вышедших препятствий
+            obstacles = obstacles.filter(obs => obs.x + obstacleWidth > 0);
+            
+            // Проверка столкновения
+            if (checkCollision()) {
+                gameOver();
+            }
+            
+            updateDisplay();
+        }
+        
+        // Отрисовка
+        function draw() {
+            // Небо
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#87CEEB');
+            gradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Облака
+            ctx.fillStyle = 'rgba(255,255,255,0.8)';
+            ctx.beginPath();
+            ctx.arc(100 + (frameCount % 500), 80, 40, 0, Math.PI * 2);
+            ctx.arc(130 + (frameCount % 500), 60, 35, 0, Math.PI * 2);
+            ctx.arc(70 + (frameCount % 500), 70, 35, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(500 + (frameCount % 400), 150, 50, 0, Math.PI * 2);
+            ctx.arc(540 + (frameCount % 400), 130, 45, 0, Math.PI * 2);
+            ctx.arc(460 + (frameCount % 400), 140, 45, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Препятствия
+            for (let obs of obstacles) {
+                // Верхняя труба
+                ctx.fillStyle = '#228B22';
+                ctx.shadowBlur = 5;
+                ctx.fillRect(obs.x, 0, obstacleWidth, obs.topHeight);
+                ctx.fillStyle = '#2E7D32';
+                ctx.fillRect(obs.x - 5, obs.topHeight - 30, obstacleWidth + 10, 30);
+                
+                // Нижняя труба
+                ctx.fillStyle = '#228B22';
+                ctx.fillRect(obs.x, obs.bottomY, obstacleWidth, canvas.height - obs.bottomY);
+                ctx.fillStyle = '#2E7D32';
+                ctx.fillRect(obs.x - 5, obs.bottomY, obstacleWidth + 10, 30);
+            }
+            ctx.shadowBlur = 0;
+            
+            // Самолетик
+            ctx.save();
+            ctx.translate(plane.x + plane.width/2, plane.y + plane.height/2);
+            ctx.rotate(plane.rotation * Math.PI / 180);
+            
+            // Корпус
+            ctx.fillStyle = '#FF6B6B';
+            ctx.beginPath();
+            ctx.moveTo(-15, -10);
+            ctx.lineTo(25, 0);
+            ctx.lineTo(-15, 10);
+            ctx.fill();
+            
+            // Крылья
+            ctx.fillStyle = '#FF8C8C';
+            ctx.fillRect(-5, -15, 30, 5);
+            ctx.fillRect(-5, 10, 30, 5);
+            
+            // Кабина
+            ctx.fillStyle = '#87CEEB';
+            ctx.beginPath();
+            ctx.arc(20, 0, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Пропеллер
+            ctx.fillStyle = '#CD853F';
+            ctx.fillRect(-20, -3, 10, 6);
+            
+            ctx.restore();
+            
+            // Инвентарь
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, 40);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px Inter';
+            ctx.fillText(`Счет: ${score}`, 15, 30);
+            ctx.fillStyle = '#ffc107';
+            ctx.fillText(`Монеты: ${Math.floor(gameState.coins)}`, 150, 30);
+            
+            if (invincibleFrames > 0) {
+                ctx.fillStyle = '#4caf50';
+                ctx.font = 'bold 16px Inter';
+                ctx.fillText(`🛡️ НЕУЯЗВИМ`, canvas.width - 120, 30);
+            }
+            
+            if (!gameRunning) {
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 36px Inter';
+                ctx.fillText('КЛИКНИТЕ, ЧТОБЫ ЛЕТЕТЬ', canvas.width/2 - 200, canvas.height/2);
+            }
+        }
+        
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function buyUpgrade(id) {
+            const upgrade = gameState.upgrades[id];
+            const config = upgradesConfig[id];
+            const cost = getUpgradeCost(upgrade);
+            
+            if (gameState.coins >= cost) {
+                gameState.coins -= cost;
+                upgrade.level++;
+                totalUpgradesBought++;
+                
+                updateDisplay();
+                saveGame();
+                showToast(`Куплено: ${config.name} ур.${upgrade.level}!`, 'success');
+            } else {
+                showToast(`Не хватает ${cost} монет!`, 'error');
+            }
+        }
+        
+        function updateDisplay() {
+            document.getElementById('coinsDisplay').innerHTML = Math.floor(gameState.coins);
+            document.getElementById('scoreDisplay').innerHTML = score;
+            document.getElementById('bestScoreDisplay').innerHTML = gameState.bestScore;
+            document.getElementById('totalFlights').innerHTML = gameState.totalFlights;
+            document.getElementById('totalDistance').innerHTML = gameState.totalDistance;
+            document.getElementById('upgradeCount').innerHTML = totalUpgradesBought;
+            document.getElementById('speedBonus').innerHTML = `+${Math.floor((updateSpeed() - baseSpeed) * 10)}%`;
+            
+            renderUpgrades();
+        }
+        
+        function renderUpgrades() {
+            const container = document.getElementById('upgradesGrid');
+            container.innerHTML = '';
+            
+            for (const [id, upgrade] of Object.entries(gameState.upgrades)) {
+                const config = upgradesConfig[id];
+                const cost = getUpgradeCost(upgrade);
+                const canAfford = gameState.coins >= cost;
+                
+                let extraInfo = '';
+                if (id === 'doubleCoins') extraInfo = `+${upgrade.level * 50}% монет`;
+                if (id === 'speedBoost') extraInfo = `+${(upgrade.level * 0.5).toFixed(1)} скорость`;
+                if (id === 'invincibility') extraInfo = `${Math.min(10 + upgrade.level * 5, 40)}% шанс уклонения`;
+                if (id === 'magnet') extraInfo = `+${upgrade.level * 5}% радиус сбора`;
+                
+                container.innerHTML += `
+                    <div class="upgrade-card ${!canAfford ? 'disabled' : ''}">
+                        <div class="upgrade-name">
+                            <i class="${config.icon}"></i> ${config.name}
+                            <span class="upgrade-level">ур.${upgrade.level}</span>
+                        </div>
+                        <div style="font-size:0.75rem; color:#aaa;">${config.desc}</div>
+                        <div class="upgrade-price">💰 ${cost} монет</div>
+                        <div style="font-size:0.7rem;">📊 ${extraInfo}</div>
+                        <button class="buy-btn" onclick="buyUpgrade('${id}')" ${!canAfford ? 'disabled' : ''}>КУПИТЬ</button>
+                    </div>
+                `;
+            }
+        }
+        
+        function checkDailyReward() {
+            const last = gameState.lastDaily;
+            const now = new Date().toDateString();
+            const dailyBtn = document.getElementById('dailyBtn');
+            const dailyTimer = document.getElementById('dailyTimer');
+            
+            if (last !== now) {
+                dailyBtn.disabled = false;
+                dailyTimer.innerHTML = 'Доступно!';
+            } else {
+                dailyBtn.disabled = true;
+                dailyTimer.innerHTML = 'Уже получено сегодня';
+            }
+        }
+        
+        function claimDaily() {
+            const now = new Date().toDateString();
+            if (gameState.lastDaily !== now) {
+                const reward = 500;
+                gameState.coins += reward;
+                gameState.lastDaily = now;
+                updateDisplay();
+                saveGame();
+                checkDailyReward();
+                showToast(`🎁 Ежедневная награда: +${reward} монет!`, 'success');
+            }
+        }
+        
+        function saveGame() {
+            localStorage.setItem('aviatorGame', JSON.stringify({
+                coins: gameState.coins,
+                bestScore: gameState.bestScore,
+                totalFlights: gameState.totalFlights,
+                totalDistance: gameState.totalDistance,
+                lastDaily: gameState.lastDaily,
+                upgrades: gameState.upgrades
+            }));
+        }
+        
+        function loadGame() {
+            const saved = localStorage.getItem('aviatorGame');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    gameState = { ...gameState, ...data };
+                    bestScore = gameState.bestScore;
+                    totalUpgradesBought = Object.values(gameState.upgrades).reduce((sum, u) => sum + u.level, 0);
+                    updateDisplay();
+                } catch(e) {}
+            }
+            checkDailyReward();
+        }
+        
+        function resetGameProgress() {
+            if (confirm('Вы уверены? Весь прогресс будет потерян!')) {
+                localStorage.removeItem('aviatorGame');
+                location.reload();
+            }
+        }
+        
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'error' ? '#dc3545' : type === 'achievement' ? '#ffc107' : '#2c7a4d'};
+                color: ${type === 'achievement' ? '#1a1f2e' : 'white'};
+                padding: 12px 24px;
+                border-radius: 50px;
+                font-weight: 600;
+                z-index: 2000;
+                animation: fadeInUp 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            `;
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGame();
+            gameLoop();
+            
+            canvas.addEventListener('click', jump);
+            document.getElementById('dailyBtn').addEventListener('click', claimDaily);
+            document.getElementById('resetBtn').addEventListener('click', resetGameProgress);
+        });
+    </script>
+</body>
+</html>

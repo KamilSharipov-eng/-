@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЧИСТАПРО | Профессиональный клининг</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./style_Главная страница.css">
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Шапка -->
+        <nav class="navbar">
+            <div class="logo">ЧИСТА<span>ПРО</span></div>
+            <div class="nav-links">
+                <a href="./Главная Страница.html">Главная</a>
+                <a href="./услуги.html">Услуги</a>
+                <a href="./О нас.html">О нас</a>
+                <a href="./Отзывы.html">Отзывы</a>
+                <a href="./Контакты./Контакты.html">Контакты</a>
+            </div>
+        </nav>
+
+        <!-- Hero секция -->
+        <section id="home">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i> Профессиональный клининг
+                    </div>
+                    <h1 class="animate-fade-left">Идеальная чистота<br>для вашего дома</h1>
+                    <p class="animate-fade-left delay-1">ЧИСТАПРО — клининговая служба полного цикла. Убираем квартиры,
+                        офисы, коттеджи. Работаем быстро, качественно и с заботой о вашем здоровье.</p>
+                    <div class="hero-buttons animate-fade-left delay-2">
+                        <button class="btn btn-primary" id="orderNowBtn"><i class="fas fa-calendar-check"></i> Заказать
+                            уборку</button>
+                    </div>
+                </div>
+                <div class="hero-image animate-fade-right">
+                    <i class="fas fa-broom-ball"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <div class="features">
+            <h2 class="section-title animate-fade-up">Почему выбирают нас</h2>
+            <div class="section-sub animate-fade-up delay-1">Забота о вашем комфорте — наша главная ценность</div>
+            <div class="features-grid">
+                <div class="feature-card animate-fade-up delay-1">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Опытные клинеры</h3>
+                    <p>Сертифицированные специалисты с опытом работы от 3 лет</p>
+                </div>
+                <div class="feature-card animate-fade-up delay-2">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Эко-средства</h3>
+                    <p>Гипоаллергенные составы, безопасные для детей и питомцев</p>
+                </div>
+                <div class="feature-card animate-fade-up delay-3">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Гарантия качества</h3>
+                    <p>Если результат не устроит — переделаем бесплатно</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Услуги -->
+        <div class="services" id="services">
+            <h2 class="section-title animate-fade-up">Наши услуги</h2>
+            <div class="section-sub animate-fade-up delay-1">Выберите идеальный вариант для вашего пространства</div>
+            <div class="services-grid">
+                <div class="service-card animate-fade-up">
+                    <div class="service-icon"><i class="fas fa-home"></i></div>
+                    <h3>Квартирная уборка</h3>
+                    <p>Поддерживающая, генеральная, после ремонта. Выезд в день заказа.</p>
+                    <div class="price">от 2 490 ₽</div>
+                    <button class="btn btn-light service-order-btn" data-service="Квартирная уборка"
+                        style="width: 100%; margin-top: 10px;">Заказать</button>
+                </div>
+                <div class="service-card animate-fade-up delay-1">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Офисный клининг</h3>
+                    <p>Комплексная уборка офисов, коворкингов. Работаем в нерабочее время.</p>
+                    <div class="price">от 4 900 ₽</div>
+                    <button class="btn btn-light service-order-btn" data-service="Офисный клининг"
+                        style="width: 100%; margin-top: 10px;">Заказать</button>
+                </div>
+                <div class="service-card animate-fade-up delay-2">
+                    <div class="service-icon"><i class="fas fa-couch"></i></div>
+                    <h3>Химчистка мебели</h3>
+                    <p>Диваны, кресла, ковры. Удаление любых пятен, глубокое очищение.</p>
+                    <div class="price">от 1 890 ₽</div>
+                    <button class="btn btn-light service-order-btn" data-service="Химчистка мебели"
+                        style="width: 100%; margin-top: 10px;">Заказать</button>
+                </div>
+                <div class="service-card animate-fade-up delay-3">
+                    <div class="service-icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h3>После ремонта</h3>
+                    <p>Удаление пыли, строительного мусора. Готово к заселению за 1 день.</p>
+                    <div class="price">от 6 490 ₽</div>
+                    <button class="btn btn-light service-order-btn" data-service="Уборка после ремонта"
+                        style="width: 100%; margin-top: 10px;">Заказать</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- О нас -->
+        <div class="about" id="about">
+            <div class="about-content">
+                <div class="about-text animate-fade-left">
+                    <h2>ЧИСТАПРО — <span style="color: #2c7a4d;">чистота</span> в каждой детали</h2>
+                    <p>Мы работаем с 2018 года и за это время провели более 5000 уборок. Наша команда — это
+                        профессионалы, которые знают, как сделать ваш дом идеально чистым.</p>
+                    <ul class="about-list">
+                        <li><i class="fas fa-check-circle"></i> Бесплатный выезд оценщика</li>
+                        <li><i class="fas fa-check-circle"></i> Фиксированная цена без наценок</li>
+                        <li><i class="fas fa-check-circle"></i> Скидка 15% на первый заказ</li>
+                        <li><i class="fas fa-check-circle"></i> Работаем по договору с гарантией</li>
+                    </ul>
+                </div>
+                <div class="about-image animate-fade-right">
+                    <i class="fas fa-hand-sparkles"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Отзывы -->
+        <div class="reviews" id="reviews">
+            <h2 class="section-title animate-fade-up">Отзывы клиентов</h2>
+            <div class="section-sub animate-fade-up delay-1">Нас рекомендуют и возвращаются снова</div>
+            <div class="reviews-grid">
+                <div class="review-card animate-fade-up">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Отличная работа! Приехали вовремя, всё убрали идеально. Особенно
+                        понравилось, что использовали экологичные средства — для нас с детьми это важно."</p>
+                    <div class="review-author">— Анна Смирнова</div>
+                </div>
+                <div class="review-card animate-fade-up delay-1">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Заказывал химчистку дивана — результат превзошёл ожидания. Пятна, которые
+                        годами не выводились, исчезли! Рекомендую ЧИСТАПРО."</p>
+                    <div class="review-author">— Михаил Волков</div>
+                </div>
+                <div class="review-card animate-fade-up delay-2">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Убирали офис после ремонта. Всё сделали быстро, аккуратно, без лишних
+                        вопросов. Цена адекватная, будем сотрудничать на постоянной основе."</p>
+                    <div class="review-author">— Екатерина, ООО "СтройИнвест"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Форма заказа -->
+        <div class="form-section" id="contact">
+            <div class="form-wrapper">
+                <div class="form-info animate-fade-left">
+                    <h2>Оставьте заявку <i class="fas fa-paper-plane"></i></h2>
+                    <p>Мы перезвоним в течение 15 минут, уточним детали и подберем удобное время для уборки.</p>
+                    <p><i class="fas fa-clock"></i> Работаем ежедневно с 8:00 до 22:00</p>
+                    <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67</p>
+                </div>
+                <div class="order-form animate-fade-right">
+                    <input type="text" id="userName" placeholder="Ваше имя *">
+                    <input type="tel" id="userPhone" placeholder="Номер телефона *">
+                    <select id="userService">
+                        <option value="Квартирная уборка">Квартирная уборка</option>
+                        <option value="Офисный клининг">Офисный клининг</option>
+                        <option value="Химчистка мебели">Химчистка мебели</option>
+                        <option value="Уборка после ремонта">Уборка после ремонта</option>
+                    </select>
+                    <input type="text" id="userDate" placeholder="Желаемая дата" onfocus="(this.type='date')"
+                        onblur="if(!this.value) this.type='text'">
+                    <button class="btn btn-primary" id="submitOrder"><i class="fas fa-paper-plane"></i> Отправить
+                        заявку</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ЧИСТА<span style="color:#a5d6a5;">ПРО</span></div>
+            <div>© 2026 Клининговая служба. Все права защищены.</div>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vk"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h3 id="modalTitle">Спасибо!</h3>
+            <p id="modalMessage">Ваша заявка принята. Менеджер свяжется с вами в ближайшее время.</p>
+            <button class="close-modal" id="closeModal">Отлично, закрыть</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Элементы
+        const modal = document.getElementById('modal');
+        const toast = document.getElementById('toast');
+
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerHTML = message;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function showToast(text) {
+            toast.innerText = text;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2500);
+        }
+
+        // Отправка заявки
+        function submitRequest(name, phone, service, date) {
+            if (!name.trim() || !phone.trim()) {
+                showModal('Не хватает данных', 'Пожалуйста, укажите имя и номер телефона для связи 📞');
+                return false;
+            }
+            const dateText = date ? ` на ${date}` : '';
+            // Измененное сообщение: "Спасибо! Перезвоним вам позже"
+            showModal('Спасибо!', `✅ ${name}, ваша заявка на услугу "${service}"${dateText} принята!<br><br>📞 Перезвоним вам позже по номеру ${phone}.`);
+            return true;
+        }
+
+        // Заказ услуги (скролл к форме)
+        function orderService(serviceName) {
+            const select = document.getElementById('userService');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === serviceName || select.options[i].text === serviceName) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            showToast(`Выбрана услуга: ${serviceName}. Заполните форму ниже 👇`);
+        }
+
+        // Обработчики событий
+        document.addEventListener('DOMContentLoaded', () => {
+            // Кнопка "Заказать уборку" в Hero
+            const orderNowBtn = document.getElementById('orderNowBtn');
+            if (orderNowBtn) {
+                orderNowBtn.addEventListener('click', () => {
+                    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                    showToast('📋 Заполните форму — мы свяжемся с вами');
+                });
+            }
+
+            // Кнопки заказа в карточках услуг
+            const serviceBtns = document.querySelectorAll('.service-order-btn');
+            serviceBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const service = btn.getAttribute('data-service');
+                    orderService(service);
+                });
+            });
+
+            // Отправка формы
+            const submitBtn = document.getElementById('submitOrder');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                    const name = document.getElementById('userName').value;
+                    const phone = document.getElementById('userPhone').value;
+                    const service = document.getElementById('userService').value;
+                    const date = document.getElementById('userDate').value;
+                    submitRequest(name, phone, service, date);
+
+                    // Очищаем поля формы после отправки
+                    if (name.trim() && phone.trim()) {
+                        document.getElementById('userName').value = '';
+                        document.getElementById('userPhone').value = '';
+                        document.getElementById('userDate').value = '';
+                    }
+                });
+            }
+
+            // Закрытие модалки
+            const closeModalBtn = document.getElementById('closeModal');
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // Социальные иконки
+            const socialIcons = document.querySelectorAll('.socials i');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast('📱 Мы в соцсетях! Скоро свяжемся с вами');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

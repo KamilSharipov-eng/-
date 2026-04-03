@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЧИСТАПРО | Услуги клининга</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./style_услуги.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Шапка -->
+        <nav class="navbar">
+            <a href="index.html" class="logo">ЧИСТА<span>ПРО</span></a>
+            <div class="nav-links">
+                <a href="./Главная Страница.html">Главная</a>
+                <a href="./услуги.html" style="color: #2c7a4d; font-weight: 600;">Услуги</a>
+                <a href="./О нас.html">О нас</a>
+                <a href="./Отзывы.html">Отзывы</a>
+                <a href="./Контакты.html">Контакты</a>
+            </div>
+        </nav>
+
+        <!-- Hero секция -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-left">
+                    <i class="fas fa-sparkles"></i> Наши услуги
+                </div>
+                <h1 class="animate-fade-left delay-1">Профессиональный<br>клининг для любого<br>пространства</h1>
+                <p class="animate-fade-left delay-2">Выберите идеальный вариант уборки для вашего дома или офиса. Работаем с любыми площадями и сложностями.</p>
+            </div>
+            <div class="hero-image animate-fade-right">
+                <i class="fas fa-broom-ball"></i>
+            </div>
+        </div>
+
+        <!-- Категории услуг -->
+        <div class="categories">
+            <div class="category-tabs">
+                <button class="category-btn active" data-category="all">Все услуги</button>
+                <button class="category-btn" data-category="home">Для дома</button>
+                <button class="category-btn" data-category="office">Для офиса</button>
+                <button class="category-btn" data-category="special">Специальные</button>
+            </div>
+        </div>
+
+        <!-- Основные услуги -->
+        <div class="services-grid" id="servicesGrid">
+            <!-- Услуги будут загружены динамически через JS -->
+        </div>
+
+        <!-- CTA секция -->
+        <div class="cta animate-fade-up">
+            <h2>Нужна консультация?</h2>
+            <p>Наши специалисты помогут подобрать идеальный вариант уборки под ваш бюджет</p>
+            <button class="btn btn-light" id="consultBtn"><i class="fas fa-comments"></i> Получить консультацию</button>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ЧИСТА<span style="color:#a5d6a5;">ПРО</span></div>
+            <div>© 2025 Клининговая служба. Все права защищены.</div>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vk"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h3 id="modalTitle">Спасибо!</h3>
+            <p id="modalMessage">Ваша заявка принята. Менеджер свяжется с вами в ближайшее время.</p>
+            <button class="close-modal-btn" id="closeModal">Отлично, закрыть</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const toast = document.getElementById('toast');
+
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerHTML = message;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function showToast(text) {
+            toast.innerText = text;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2500);
+        }
+
+        // Данные услуг
+        const services = [
+            { category: 'home', name: 'Квартирная уборка', icon: 'fas fa-home', desc: 'Регулярная, генеральная или после ремонта. Безопасные средства и профессиональное оборудование.', features: ['Уборка всех комнат', 'Мойка полов и поверхностей', 'Вынос мусора', 'Чистка санузлов'], price: '2 490', note: 'за 1-комнатную квартиру' },
+            { category: 'home', name: 'Уборка коттеджей', icon: 'fas fa-tree', desc: 'Комплексная уборка загородных домов любой площади. Работаем с бассейнами и придомовой территорией.', features: ['Уборка всех этажей', 'Мойка фасадов', 'Чистка бассейна', 'Уход за территорией'], price: '7 990', note: 'от 100м²' },
+            { category: 'office', name: 'Офисный клининг', icon: 'fas fa-building', desc: 'Ежедневная, поддерживающая или комплексная уборка офисов. Работаем в нерабочее время.', features: ['Уборка рабочих мест', 'Мойка полов и окон', 'Чистка кухни', 'Вынос мусора'], price: '4 900', note: 'за офис до 50м²' },
+            { category: 'office', name: 'Уборка ТЦ и магазинов', icon: 'fas fa-store', desc: 'Профессиональная уборка торговых центров, магазинов, витрин. Работаем ночью.', features: ['Мытье витрин', 'Уборка торговых залов', 'Чистка подсобных помещений', 'Полировка поверхностей'], price: 'договорная', note: 'индивидуальный расчет' },
+            { category: 'special', name: 'Химчистка мебели', icon: 'fas fa-couch', desc: 'Глубокая очистка мягкой мебели, удаление пятен и запахов. Безопасные средства.', features: ['Выведение пятен', 'Удаление запахов', 'Антибактериальная обработка', 'Быстрая сушка'], price: '1 890', note: 'за 1 предмет' },
+            { category: 'special', name: 'Уборка после ремонта', icon: 'fas fa-hard-hat', desc: 'Полное удаление строительной пыли, мусора. Готово к заселению за 1 день.', features: ['Удаление пыли', 'Мойка окон', 'Чистка вентиляции', 'Вынос строительного мусора'], price: '6 490', note: 'от 1 комнаты' },
+        ];
+
+        // Функция рендеринга услуг
+        function renderServices(category = 'all') {
+            const grid = document.getElementById('servicesGrid');
+            const filtered = category === 'all' ? services : services.filter(s => s.category === category);
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; grid-column: 1/-1; padding: 50px;">Услуги в этой категории скоро появятся</div>';
+                return;
+            }
+            
+            grid.innerHTML = filtered.map((service, index) => `
+                <div class="service-card animate-zoom delay-${(index % 5) + 1}">
+                    <div class="service-icon">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>${service.name}</h3>
+                        <p class="service-description">${service.desc}</p>
+                        <ul class="service-features">
+                            ${service.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
+                        </ul>
+                        <div class="price-row">
+                            <div class="price">от ${service.price} ₽</div>
+                            <div class="price-note">${service.note}</div>
+                        </div>
+                        <button class="btn btn-primary service-order" data-service="${service.name}" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Заказать услугу</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Добавляем обработчики для кнопок заказа
+            document.querySelectorAll('.service-order').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const serviceName = btn.getAttribute('data-service');
+                    showModal('Заказ услуги', `Вы выбрали услугу "${serviceName}".<br><br>Для оформления заказа позвоните нам:<br><i class="fas fa-phone"></i> +7 (999) 123-45-67<br><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67<br><br>Или оставьте заявку на главной странице!`);
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Рендерим все услуги
+            renderServices('all');
+
+            // Категории
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const category = btn.getAttribute('data-category');
+                    renderServices(category);
+                });
+            });
+
+            // Кнопка "Получить консультацию"
+            const consultBtn = document.getElementById('consultBtn');
+            if (consultBtn) {
+                consultBtn.addEventListener('click', () => {
+                    showModal('Консультация специалиста', 'Оставьте заявку, и мы перезвоним в течение 15 минут!<br><br><i class="fas fa-phone"></i> +7 (999) 123-45-67<br><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67');
+                });
+            }
+
+            // Социальные иконки
+            const socialIcons = document.querySelectorAll('.socials i');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast('📱 Мы в соцсетях! Скоро свяжемся с вами');
+                });
+            });
+
+            // Закрытие модалки
+            const closeModalBtn = document.getElementById('closeModal');
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        });
+    </script>
+</body>
+</html>

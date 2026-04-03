@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЧИСТАПРО | Контакты</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./style_Контакты.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Шапка -->
+        <nav class="navbar">
+            <a href="index.html" class="logo">ЧИСТА<span>ПРО</span></a>
+            <div class="nav-links">
+                <a href="./Главная Страница.html">Главная</a>
+                <a href="./услуги.html">Услуги</a>
+                <a href="./О нас.html">О нас</a>
+                <a href="./Отзывы.html">Отзывы</a>
+                <a href="./Контакты.html" style="color: #2c7a4d; font-weight: 600;">Контакты</a>
+            </div>
+        </nav>
+
+        <!-- Hero секция -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-left">
+                    <i class="fas fa-map-marker-alt"></i> Свяжитесь с нами
+                </div>
+                <h1 class="animate-fade-left delay-1">Мы всегда на связи<br>и готовы помочь</h1>
+                <p class="animate-fade-left delay-2">Оставьте заявку или свяжитесь с нами любым удобным способом. Мы
+                    ответим на все вопросы и подберем идеальный вариант уборки.</p>
+                <div class="animate-fade-left delay-3">
+                    <button class="btn btn-primary" id="contactFormBtn"><i class="fas fa-paper-plane"></i> Отправить
+                        заявку</button>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-right">
+                <i class="fas fa-headset"></i>
+            </div>
+        </div>
+
+        <!-- Контактная информация -->
+        <div class="contact-info">
+            <div class="contact-grid">
+                <div class="contact-card animate-zoom delay-1">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Телефон</h3>
+                    <p>+7 (999) 123-45-67</p>
+                    <p>+7 (888) 765-43-21</p>
+                    <button class="contact-link" id="phoneBtn">Позвонить сейчас →</button>
+                </div>
+                <div class="contact-card animate-zoom delay-2">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>info@chistapro.ru</p>
+                    <p>zakaz@chistapro.ru</p>
+                    <button class="contact-link" id="emailBtn">Написать письмо →</button>
+                </div>
+                <div class="contact-card animate-zoom delay-3">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Адрес офиса</h3>
+                    <p>г. Альметьевск, ул. Ленина, д. 15</p>
+                    <p>ТЦ "Ленина", 2 этаж, офис 205</p>
+                    <button class="contact-link" id="showMapBtn">Посмотреть на карте →</button>
+                </div>
+                <div class="contact-card animate-zoom delay-4">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>Мессенджеры</h3>
+                    <p>WhatsApp: +7 (999) 123-45-67</p>
+                    <p>Telegram: @chistapro</p>
+                    <button class="contact-link" id="openChatBtn">Написать в чат →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карта и форма -->
+        <div class="map-form">
+            <div class="map animate-fade-left" id="mapContainer">
+                <iframe id="yandexMap"
+                    src="https://yandex.ru/map-widget/v1/?ll=52.2974,54.9010&z=17&pt=52.2974,54.9010,flag&text=Альметьевск%20улица%20Ленина%2015"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="contact-form animate-fade-right">
+                <h3>Свяжитесь с нами</h3>
+                <p>Оставьте заявку, и мы перезвоним в течение 15 минут</p>
+                <div class="form-group">
+                    <input type="text" id="contactName" placeholder="Ваше имя *">
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="contactPhone" placeholder="Номер телефона *">
+                </div>
+                <div class="form-group">
+                    <select id="contactService">
+                        <option value="Квартирная уборка">Квартирная уборка</option>
+                        <option value="Офисный клининг">Офисный клининг</option>
+                        <option value="Химчистка мебели">Химчистка мебели</option>
+                        <option value="Уборка после ремонта">Уборка после ремонта</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea id="contactMessage" placeholder="Ваше сообщение (необязательно)"></textarea>
+                </div>
+                <button class="btn btn-primary" id="submitContactForm" style="width: 100%;"><i
+                        class="fas fa-paper-plane"></i> Отправить сообщение</button>
+            </div>
+        </div>
+
+        <!-- Режим работы -->
+        <div class="work-hours">
+            <h2 class="animate-fade-up">Режим работы</h2>
+            <div class="hours-grid">
+                <div class="hours-item animate-fade-up delay-1">
+                    <i class="fas fa-calendar-day"></i>
+                    <h4>Будние дни</h4>
+                    <p>8:00 - 22:00</p>
+                </div>
+                <div class="hours-item animate-fade-up delay-2">
+                    <i class="fas fa-calendar-weekend"></i>
+                    <h4>Суббота</h4>
+                    <p>9:00 - 20:00</p>
+                </div>
+                <div class="hours-item animate-fade-up delay-3">
+                    <i class="fas fa-calendar-weekend"></i>
+                    <h4>Воскресенье</h4>
+                    <p>10:00 - 18:00</p>
+                </div>
+                <div class="hours-item animate-fade-up delay-4">
+                    <i class="fas fa-clock"></i>
+                    <h4>Круглосуточная поддержка</h4>
+                    <p>24/7 по телефону и WhatsApp</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA секция -->
+        <div class="cta animate-fade-up">
+            <h2>Нужна консультация?</h2>
+            <p>Наши специалисты ответят на все вопросы и помогут подобрать идеальный вариант уборки</p>
+            <button class="btn btn-light" id="ctaCallBtn"><i class="fas fa-phone"></i> Заказать звонок</button>
+        </div>
+    </div>
+
+    <!-- Всплывающее окно чата справа снизу -->
+    <div class="floating-chat">
+        <div class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h4><i class="fas fa-headset"></i> Чат с поддержкой</h4>
+                <span class="chat-close" id="chatClose">&times;</span>
+            </div>
+            <div class="chat-body">
+                <div class="chat-message bot">
+                    <strong>ЧИСТАПРО:</strong> Здравствуйте! 👋<br>Чем мы можем вам помочь? Оставьте номер, и мы
+                    перезвоним, или задайте вопрос.
+                </div>
+                <div class="quick-buttons">
+                    <button class="quick-btn" data-question="Нужна уборка квартиры">🏠 Уборка квартиры</button>
+                    <button class="quick-btn" data-question="Сколько стоит клининг">💰 Узнать цены</button>
+                    <button class="quick-btn" data-question="Нужна химчистка мебели">🛋️ Химчистка</button>
+                    <button class="quick-btn" data-question="Позвоните мне">📞 Перезвоните мне</button>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Введите сообщение...">
+                    <button id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ЧИСТА<span style="color:#a5d6a5;">ПРО</span></div>
+            <div>© 2025 Клининговая служба. Все права защищены.</div>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vk"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px);">
+        <div
+            style="background: white; max-width: 450px; width: 90%; border-radius: 40px; padding: 40px 30px; text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 65px; color: #2c7a4d; margin-bottom: 20px;"></i>
+            <h3 id="modalTitle" style="font-size: 1.8rem; margin-bottom: 12px;">Спасибо!</h3>
+            <p id="modalMessage" style="margin-bottom: 28px; color: #4a5b4c;">Ваше сообщение отправлено. Менеджер
+                свяжется с вами в ближайшее время.</p>
+            <button id="closeModal"
+                style="background: #2c7a4d; border: none; padding: 12px 28px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer;">Отлично,
+                закрыть</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const toast = document.getElementById('toast');
+
+        function showModal(title, message, redirectUrl = null) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerHTML = message;
+            modal.style.display = 'flex';
+            
+            // Если нужен редирект после закрытия
+            if (redirectUrl) {
+                const closeBtn = document.getElementById('closeModal');
+                const oldClick = closeBtn.onclick;
+                closeBtn.onclick = () => {
+                    closeModal();
+                    window.location.href = redirectUrl;
+                };
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            // Восстанавливаем стандартную кнопку
+            const closeBtn = document.getElementById('closeModal');
+            closeBtn.onclick = closeModal;
+        }
+
+        function showToast(text) {
+            toast.innerText = text;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2500);
+        }
+
+        // Открытие карты в новом окне
+        function openMapInNewWindow() {
+            const url = 'https://yandex.ru/maps/?text=Альметьевск%20улица%20Ленина%2015&ll=52.2974,54.9010&z=17';
+            window.open(url, '_blank');
+        }
+
+        // Функция отправки формы и редиректа на главную
+        function submitContactForm() {
+            const name = document.getElementById('contactName').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const service = document.getElementById('contactService').value;
+            const message = document.getElementById('contactMessage').value.trim();
+            
+            if (!name || !phone) {
+                showModal('Ошибка', 'Пожалуйста, заполните имя и номер телефона 📞');
+                return false;
+            }
+            
+            // Показываем сообщение об успехе и перекидываем на главную
+            const successMessage = `${name}, ваша заявка на услугу "${service}" успешно отправлена!<br>Мы свяжемся с вами по номеру ${phone} в ближайшее время.`;
+            showModal('Заявка отправлена!', successMessage, './Главная Страница.html');
+            
+            // Очищаем форму
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactPhone').value = '';
+            document.getElementById('contactMessage').value = '';
+            
+            return true;
+        }
+
+        // Чат-функции
+        const chatToggle = document.getElementById('chatToggle');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatClose = document.getElementById('chatClose');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const chatBody = document.querySelector('.chat-body');
+
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+        });
+
+        function addMessage(text, isUser = true) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.innerHTML = isUser ? `<strong>Вы:</strong> ${text}` : `<strong>ЧИСТАПРО:</strong> ${text}`;
+
+            const quickBtns = document.querySelector('.quick-buttons');
+            if (quickBtns) {
+                if (!isUser && quickBtns.parentNode === chatBody) {
+                    chatBody.insertBefore(messageDiv, quickBtns);
+                } else {
+                    chatBody.insertBefore(messageDiv, document.querySelector('.chat-input'));
+                }
+            } else {
+                chatBody.insertBefore(messageDiv, document.querySelector('.chat-input'));
+            }
+
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, true);
+            chatInput.value = '';
+
+            setTimeout(() => {
+                let reply = '';
+                if (message.toLowerCase().includes('уборк') || message.toLowerCase().includes('квартир')) {
+                    reply = 'Мы предлагаем уборку квартир от 2490 ₽. Оставьте номер, и мы подберем идеальный вариант!';
+                } else if (message.toLowerCase().includes('цен') || message.toLowerCase().includes('стоим')) {
+                    reply = '💰 Стоимость уборки зависит от площади и типа. Квартира до 50м² — от 2490₽, от 80м² — от 3890₽. Офисы — договорная цена.';
+                } else if (message.toLowerCase().includes('химчистк') || message.toLowerCase().includes('мебел')) {
+                    reply = '🛋️ Химчистка мебели — от 1890₽ за предмет. Диваны, кресла, ковры. Глубокая очистка и выведение пятен!';
+                } else if (message.toLowerCase().includes('позвон') || message.toLowerCase().includes('перезвон')) {
+                    reply = '📞 Оставьте ваш номер телефона, и мы перезвоним в течение 5 минут!';
+                } else {
+                    reply = 'Спасибо за обращение! Наш менеджер свяжется с вами в ближайшее время. Или позвоните нам по телефону +7 (999) 123-45-67';
+                }
+                addMessage(reply, false);
+            }, 500);
+        }
+
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Быстрые кнопки чата
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const question = btn.getAttribute('data-question');
+                addMessage(question, true);
+                chatInput.value = '';
+                setTimeout(() => {
+                    let reply = '';
+                    if (question.includes('уборка квартиры')) {
+                        reply = 'Уборка квартир от 2490 ₽. Выезжаем в день заказа! Оставьте номер телефона, и мы подберем удобное время.';
+                    } else if (question.includes('цены')) {
+                        reply = '💰 Цены: квартира до 50м² — от 2490₽, до 80м² — от 3890₽, от 80м² — от 4890₽. Офисы — от 4900₽. Точный расчет после оценки!';
+                    } else if (question.includes('химчистка')) {
+                        reply = '🛋️ Химчистка мебели — от 1890₽. Чистка ковров — от 1200₽. Работаем с любыми загрязнениями!';
+                    } else if (question.includes('Позвоните')) {
+                        reply = '📞 Оставьте ваш номер, и мы перезвоним в течение 5 минут! Или звоните сами: +7 (999) 123-45-67';
+                    }
+                    addMessage(reply, false);
+                }, 300);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Кнопка "Отправить заявку" в Hero
+            const contactFormBtn = document.getElementById('contactFormBtn');
+            if (contactFormBtn) {
+                contactFormBtn.addEventListener('click', () => {
+                    document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    showToast('📋 Заполните форму ниже — мы свяжемся с вами');
+                });
+            }
+
+            // Кнопка "Позвонить сейчас"
+            const phoneBtn = document.getElementById('phoneBtn');
+            if (phoneBtn) {
+                phoneBtn.addEventListener('click', () => {
+                    showModal('Свяжитесь с нами', '<i class="fas fa-phone"></i> +7 (999) 123-45-67<br><i class="fab fa-whatsapp"></i> WhatsApp: +7 (999) 123-45-67<br><br>Мы работаем ежедневно с 8:00 до 22:00');
+                });
+            }
+
+            // Кнопка "Написать письмо"
+            const emailBtn = document.getElementById('emailBtn');
+            if (emailBtn) {
+                emailBtn.addEventListener('click', () => {
+                    window.location.href = 'mailto:info@chistapro.ru';
+                });
+            }
+
+            // Кнопка "Посмотреть на карте"
+            const showMapBtn = document.getElementById('showMapBtn');
+            if (showMapBtn) {
+                showMapBtn.addEventListener('click', openMapInNewWindow);
+            }
+
+            // Кнопка "Написать в чат"
+            const openChatBtn = document.getElementById('openChatBtn');
+            if (openChatBtn) {
+                openChatBtn.addEventListener('click', () => {
+                    chatWindow.classList.add('active');
+                    chatToggle.style.display = 'none';
+                    setTimeout(() => {
+                        chatToggle.style.display = 'flex';
+                    }, 100);
+                });
+            }
+
+            // Кнопка "Заказать звонок" в CTA
+            const ctaCallBtn = document.getElementById('ctaCallBtn');
+            if (ctaCallBtn) {
+                ctaCallBtn.addEventListener('click', () => {
+                    showModal('Заказать звонок', 'Оставьте свой номер, и мы перезвоним в течение 15 минут!<br><br><i class="fas fa-phone"></i> +7 (999) 123-45-67<br>Или напишите нам в чат!');
+                });
+            }
+
+            // Отправка формы
+            const submitBtn = document.getElementById('submitContactForm');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', submitContactForm);
+            }
+
+            // Социальные иконки
+            const socialIcons = document.querySelectorAll('.socials i');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast('📱 Мы в соцсетях! Скоро свяжемся с вами');
+                });
+            });
+
+            // Закрытие модалки
+            const closeModalBtn = document.getElementById('closeModal');
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        });
+    </script>
+</body>
+
+</html>

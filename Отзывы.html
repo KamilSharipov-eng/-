@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ЧИСТАПРО | Отзывы клиентов</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./style_Отзывы.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Шапка -->
+        <nav class="navbar">
+            <a href="index.html" class="logo">ЧИСТА<span>ПРО</span></a>
+            <div class="nav-links">
+                <a href="./Главная Страница.html">Главная</a>
+                <a href="./услуги.html">Услуги</a>
+                <a href="./О нас.html">О нас</a>
+                <a href="./Отзывы.html" style="color: #2c7a4d; font-weight: 600;">Отзывы</a>
+                <a href="./Контакты.html">Контакты</a>
+            </div>
+        </nav>
+
+        <!-- Hero секция -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-left">
+                    <i class="fas fa-star"></i> Мнение клиентов
+                </div>
+                <h1 class="animate-fade-left delay-1">Что говорят<br>наши клиенты</h1>
+                <p class="animate-fade-left delay-2">Более 5000 довольных клиентов доверяют нам чистоту своего дома и
+                    офиса. Присоединяйтесь к числу тех, кто уже оценил наш профессионализм!</p>
+                <div class="animate-fade-left delay-3">
+                    <button class="btn btn-primary" id="writeReviewBtn"><i class="fas fa-pen"></i> Оставить
+                        отзыв</button>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-right">
+                <i class="fas fa-comments"></i>
+            </div>
+        </div>
+
+        <!-- Статистика отзывов -->
+        <div class="stats">
+            <div class="stats-grid">
+                <div class="stat-card animate-zoom delay-1">
+                    <div class="stat-number">4.8</div>
+                    <div class="rating-large">★★★★★</div>
+                    <div class="stat-label">Средняя оценка</div>
+                </div>
+                <div class="stat-card animate-zoom delay-2">
+                    <div class="stat-number" id="totalReviews">8</div>
+                    <div class="stat-label">Всего отзывов</div>
+                </div>
+                <div class="stat-card animate-zoom delay-3">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Рекомендуют нас</div>
+                </div>
+                <div class="stat-card animate-zoom delay-4">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Лет на рынке</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="filters">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Все отзывы</button>
+                <button class="filter-btn" data-filter="5">★ 5 звезд</button>
+                <button class="filter-btn" data-filter="4">★ 4 звезды</button>
+                <button class="filter-btn" data-filter="3">★ 3 звезды</button>
+            </div>
+            <select class="sort-select" id="sortSelect">
+                <option value="newest">Сначала новые</option>
+                <option value="oldest">Сначала старые</option>
+                <option value="highest">Сначала высокие оценки</option>
+                <option value="lowest">Сначала низкие оценки</option>
+            </select>
+        </div>
+
+        <!-- Сетка отзывов -->
+        <div id="reviewsContainer" class="reviews-grid"></div>
+
+        <!-- Кнопка загрузки еще отзывов -->
+        <div style="text-align: center; margin-bottom: 50px;">
+            <button id="loadMoreBtn" class="btn btn-outline" style="display: none;">Загрузить еще отзывы</button>
+        </div>
+
+        <!-- Форма добавления отзыва -->
+        <div class="add-review" id="addReviewSection">
+            <h2 class="section-title animate-fade-up">Оставить отзыв</h2>
+            <div class="section-sub animate-fade-up delay-1">Поделитесь своим опытом с нами</div>
+            <div class="review-form">
+                <div class="form-group">
+                    <input type="text" id="reviewerName" placeholder="Ваше имя *">
+                </div>
+                <div class="form-group">
+                    <select id="reviewService">
+                        <option value="Квартирная уборка">Квартирная уборка</option>
+                        <option value="Офисный клининг">Офисный клининг</option>
+                        <option value="Химчистка мебели">Химчистка мебели</option>
+                        <option value="Уборка после ремонта">Уборка после ремонта</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="rating-input">
+                        <label>Ваша оценка: </label>
+                        <div class="star-rating">
+                            <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                            <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                            <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                            <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                            <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea id="reviewText" placeholder="Ваш отзыв *" rows="4"></textarea>
+                </div>
+                <button class="btn btn-primary" id="submitReviewBtn" style="width: 100%;"><i
+                        class="fas fa-paper-plane"></i> Отправить отзыв</button>
+            </div>
+        </div>
+
+        <!-- CTA секция -->
+        <div class="cta animate-fade-up">
+            <h2>Хотите оставить свой отзыв?</h2>
+            <p>Ваше мнение важно для нас! Расскажите о своем опыте с ЧИСТАПРО</p>
+            <button class="btn btn-light" id="ctaReviewBtn"><i class="fas fa-star"></i> Написать отзыв</button>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ЧИСТА<span style="color:#a5d6a5;">ПРО</span></div>
+            <div>© 2025 Клининговая служба. Все права защищены.</div>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vk"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px);">
+        <div
+            style="background: white; max-width: 450px; width: 90%; border-radius: 40px; padding: 40px 30px; text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 65px; color: #2c7a4d; margin-bottom: 20px;"></i>
+            <h3 id="modalTitle" style="font-size: 1.8rem; margin-bottom: 12px;">Спасибо за отзыв!</h3>
+            <p id="modalMessage" style="margin-bottom: 28px; color: #4a5b4c;">Ваш отзыв успешно добавлен и появится в
+                общем списке. Спасибо, что делитесь своим опытом! 🌟</p>
+            <button id="closeModal"
+                style="background: #2c7a4d; border: none; padding: 12px 28px; border-radius: 40px; color: white; font-weight: bold; cursor: pointer;">Отлично,
+                закрыть</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const toast = document.getElementById('toast');
+
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerHTML = message;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function showToast(text) {
+            toast.innerText = text;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2500);
+        }
+
+        function scrollToReviewForm() {
+            document.getElementById('addReviewSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Данные отзывов
+        let reviews = [
+            { id: 1, name: "Анна Смирнова", service: "Квартирная уборка", rating: 5, date: "2025-02-15", text: "Отличная работа! Приехали вовремя, всё убрали идеально. Особенно понравилось, что использовали экологичные средства — для нас с детьми это важно. Обязательно обратимся еще!" },
+            { id: 2, name: "Михаил Волков", service: "Химчистка мебели", rating: 5, date: "2025-02-10", text: "Заказывал химчистку дивана — результат превзошёл ожидания. Пятна, которые годами не выводились, исчезли! Рекомендую ЧИСТАПРО всем друзьям." },
+            { id: 3, name: "Екатерина Морозова", service: "Офисный клининг", rating: 5, date: "2025-02-05", text: "Убирали офис после ремонта. Всё сделали быстро, аккуратно, без лишних вопросов. Цена адекватная, будем сотрудничать на постоянной основе." },
+            { id: 4, name: "Дмитрий Кузнецов", service: "Квартирная уборка", rating: 4, date: "2025-01-28", text: "Хорошая уборка, все чисто и аккуратно. Единственное - немного опоздали на 15 минут, но предупредили заранее. В целом доволен." },
+            { id: 5, name: "Ольга Петрова", service: "Уборка после ремонта", rating: 5, date: "2025-01-20", text: "После ремонта осталось очень много пыли и мусора. Ребята справились за 4 часа, хотя площадь большая. Теперь квартира сияет! Спасибо большое!" },
+            { id: 6, name: "Игорь Соколов", service: "Химчистка мебели", rating: 5, date: "2025-01-15", text: "Заказывал чистку ковров. Сделали просто великолепно, ковры как новые. Цена приятно удивила. Буду рекомендовать." },
+            { id: 7, name: "Наталья Воробьева", service: "Офисный клининг", rating: 4, date: "2025-01-10", text: "Убирают хорошо, но в этот раз забыли протереть жалюзи. В остальном все отлично. Надеюсь, в следующий раз будет внимательнее." },
+            { id: 8, name: "Алексей Николаев", service: "Квартирная уборка", rating: 5, date: "2025-01-05", text: "Супер сервис! Заказал генеральную уборку перед Новым годом. Все сделали на высшем уровне. Спасибо команде ЧИСТАПРО!" }
+        ];
+
+        let currentFilter = 'all';
+        let currentSort = 'newest';
+        let visibleCount = 6;
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        function renderReviews() {
+            let filtered = [...reviews];
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(r => r.rating === parseInt(currentFilter));
+            }
+
+            if (currentSort === 'newest') {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (currentSort === 'oldest') {
+                filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (currentSort === 'highest') {
+                filtered.sort((a, b) => b.rating - a.rating);
+            } else if (currentSort === 'lowest') {
+                filtered.sort((a, b) => a.rating - b.rating);
+            }
+
+            document.getElementById('totalReviews').innerText = reviews.length;
+
+            const visibleReviews = filtered.slice(0, visibleCount);
+            const container = document.getElementById('reviewsContainer');
+
+            if (visibleReviews.length === 0) {
+                container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px;">😊 Отзывов с такими параметрами пока нет. Будьте первым!</div>';
+            } else {
+                container.innerHTML = visibleReviews.map(review => `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div class="reviewer-name">${escapeHtml(review.name)}</div>
+                                    <div class="review-date">${formatDate(review.date)}</div>
+                                </div>
+                            </div>
+                            <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                        </div>
+                        <div class="review-service">${escapeHtml(review.service)}</div>
+                        <p class="review-text">"${escapeHtml(review.text)}"</p>
+                    </div>
+                `).join('');
+            }
+
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (filtered.length > visibleCount) {
+                loadMoreBtn.style.display = 'inline-flex';
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function (c) {
+                return c;
+            });
+        }
+
+        function addReview(name, service, rating, text) {
+            if (!name.trim() || !text.trim()) {
+                showModal('Ошибка', 'Пожалуйста, заполните имя и текст отзыва 📝');
+                return false;
+            }
+            if (!rating) {
+                showModal('Ошибка', 'Пожалуйста, поставьте оценку ⭐');
+                return false;
+            }
+
+            const newReview = {
+                id: reviews.length + 1,
+                name: name.trim(),
+                service: service,
+                rating: parseInt(rating),
+                date: new Date().toISOString().split('T')[0],
+                text: text.trim()
+            };
+            reviews.unshift(newReview);
+            renderReviews();
+            showModal('Спасибо за отзыв!', `${escapeHtml(name)}, ваш отзыв успешно добавлен и появится в общем списке. 🌟<br><br>Спасибо, что делитесь своим опытом!`);
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderReviews();
+
+            // Фильтры
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.getAttribute('data-filter');
+                    visibleCount = 6;
+                    renderReviews();
+                });
+            });
+
+            // Сортировка
+            const sortSelect = document.getElementById('sortSelect');
+            sortSelect.addEventListener('change', (e) => {
+                currentSort = e.target.value;
+                visibleCount = 6;
+                renderReviews();
+            });
+
+            // Кнопка "Загрузить еще"
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.addEventListener('click', () => {
+                visibleCount += 6;
+                renderReviews();
+            });
+
+            // Кнопка "Оставить отзыв" в Hero
+            const writeReviewBtn = document.getElementById('writeReviewBtn');
+            writeReviewBtn.addEventListener('click', scrollToReviewForm);
+
+            // Кнопка "Написать отзыв" в CTA
+            const ctaReviewBtn = document.getElementById('ctaReviewBtn');
+            ctaReviewBtn.addEventListener('click', scrollToReviewForm);
+
+            // Отправка отзыва
+            const submitBtn = document.getElementById('submitReviewBtn');
+            submitBtn.addEventListener('click', () => {
+                const name = document.getElementById('reviewerName').value;
+                const service = document.getElementById('reviewService').value;
+                const rating = document.querySelector('input[name="rating"]:checked');
+                const text = document.getElementById('reviewText').value;
+
+                const ratingValue = rating ? rating.value : null;
+
+                if (addReview(name, service, ratingValue, text)) {
+                    // Очищаем форму после успешной отправки
+                    document.getElementById('reviewerName').value = '';
+                    document.getElementById('reviewText').value = '';
+                    const checkedRating = document.querySelector('input[name="rating"]:checked');
+                    if (checkedRating) checkedRating.checked = false;
+                }
+            });
+
+            // Социальные иконки
+            const socialIcons = document.querySelectorAll('.socials i');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    showToast('📱 Мы в соцсетях! Скоро свяжемся с вами');
+                });
+            });
+
+            // Закрытие модалки
+            const closeModalBtn = document.getElementById('closeModal');
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        });
+    </script>
+</body>
+
+</html>
